@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv=”refresh” content=”0">
+	<script src = "veginere.js"> </script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" type="text/css" href="myStyle.css">
+</head>
+
+<body>
+	<div id="nav-placeholder"></div>
+
+	<script>
+		$(function(){
+			$("#nav-placeholder").load("navigation/nav.jsp");
+		});
+	</script>
+
+<form class='canvas'>
+	<a href="registration.html">link</a>
+	<br>
+	<a href="session.jsp">session</a>
+</form>
+
+<div id="bot-placeholder"></div>
+<script>
+		$(function(){
+		$("#bot-placeholder").load("navigation/bot.jsp");
+		});
+</script>
+
+</body>
+</html> 

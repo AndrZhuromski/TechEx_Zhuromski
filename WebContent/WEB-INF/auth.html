@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <script src = "perm.js"> </script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="myStyle.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <script>
+        $(function(){
+        $("#nav-placeholder").load("navigation/nav.jsp");
+        });
+    </script>
+
+<form class='canvas' action="Authorize" method="POST>
+    <h2 style="margin-top: -2rem; text-align: center">Login</h2>
+    <div class="body">
+        <div class="login">
+
+            <div id="inputUsername">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+            </div> 
+            
+            <br>
+            
+            <div id="inputPassword">
+                <label for="psw"><p><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="pswrd" required>    
+            </div>
+            
+            <br>
+            
+            <div class="buttons">
+                <button type="submit" style="float: left">Login</button>
+                <button type="button" style="float: right" onclick="location.href='registration.html'">Register</button>
+            </div> 
+        </div>
+    </div>
+</form>
+
+
+<div id="bot-placeholder"></div>
+<script>
+		$(function(){
+		$("#bot-placeholder").load("navigation/bot.html");
+        });
+</script>
+</body>
+</html>
