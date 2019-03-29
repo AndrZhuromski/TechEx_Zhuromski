@@ -55,8 +55,9 @@ public class Authorize extends HttpServlet {
                  
                  Cookie[] cookies = request.getCookies();
                  if(cookies!=null)
-                 for (int i = 0; i < cookies.length; i++) {
-                  cookies[i].setMaxAge(0);
+                 for (int i = 0; i < cookies.length; i++) 
+                 {
+                	 cookies[i].setMaxAge(0);
                  }
              }
              //generate a new session
@@ -66,6 +67,7 @@ public class Authorize extends HttpServlet {
              newSession.setMaxInactiveInterval(30);
 
              Cookie message = new Cookie("uname", uname);
+             
              response.addCookie(message);  
         	 
         	 //request.setAttribute("data", new String("Success!"));           

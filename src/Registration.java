@@ -106,11 +106,13 @@ public class Registration extends HttpServlet {
 	      
 	      connection = null;
 	      String insertSql = " INSERT INTO techexUsers (id, USERNAME,FIRST_NAME,LAST_NAME,EMAIL,PASSWORD) VALUES (default,?,?,?,?,?);";
-	
+	      String createTable = "CREATE TABLE " + uname + " (ID INT NOT NULL AUTO_INCREMENT, DT DATE, TITLE varchar(50) NOT NULL, OBJECT varchar(200) NOT NULL, PRIMARY KEY (ID))";
+
 	      try 
 	      {
 	         DBConnection.getDBConnection();
 	         connection = DBConnection.connection;
+	         
 	         PreparedStatement preparedStmt = connection.prepareStatement(insertSql);
 	         preparedStmt.setString(1, uname);
 	         preparedStmt.setString(2, fname);
@@ -118,6 +120,11 @@ public class Registration extends HttpServlet {
 	         preparedStmt.setString(4, email);
 	         preparedStmt.setString(5, passw);
 	         preparedStmt.execute();
+
+	         preparedStmt = connection.prepareStatement(createTable);
+	         System.out.println(preparedStmt.toString());
+	         preparedStmt.execute();
+	        
 	         connection.close();
 	      } 
 	      catch (Exception e) 
@@ -126,7 +133,7 @@ public class Registration extends HttpServlet {
 	      }
 	      
 	 
-	      out.println("<meta http-equiv=\"refresh\" content=\"0; URL='/MyProject//auth.html'\" />");
+	      out.println("<meta http-equiv=\"refresh\" content=\"0; URL='/TechEx_Zhuromski/auth.html'\" />");
       }
       
       else
