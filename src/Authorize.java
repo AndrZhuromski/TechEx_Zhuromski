@@ -45,9 +45,10 @@ public class Authorize extends HttpServlet {
          System.out.println(preparedStatement.toString());
          ResultSet rs = preparedStatement.executeQuery();
 
-         // if username exist;
+
          if(rs.next())
          {
+        	 /*
         	 HttpSession oldSession = request.getSession(false);
              if (oldSession != null) 
              {
@@ -63,17 +64,11 @@ public class Authorize extends HttpServlet {
              //generate a new session
              HttpSession newSession = request.getSession(true);
 
-             //setting session to expiry in 5 mins
              newSession.setMaxInactiveInterval(30);
-
+			*/
              Cookie message = new Cookie("uname", uname);
-             
              response.addCookie(message);  
-        	 
-        	 //request.setAttribute("data", new String("Success!"));           
-        	 //RequestDispatcher view = request.getRequestDispatcher("template.jsp");      
-        	 //view.forward(request, response);
-        	 response.sendRedirect("index.html");
+        	 response.sendRedirect("Profile");
          }
          
          else

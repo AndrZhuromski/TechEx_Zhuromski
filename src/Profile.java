@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class Profile extends HttpServlet {
 		
 		  Connection connection = null;
 	      PreparedStatement preparedStatement = null;
+	      PrintWriter out = response.getWriter();
 	      try 
 	      {
 	         DBConnection.getDBConnection();
@@ -43,16 +45,26 @@ public class Profile extends HttpServlet {
 
 	         System.out.println(preparedStatement.toString());
 	         ResultSet rs = preparedStatement.executeQuery();
+	         String profile = "";
 
 	         if(rs.next())
 	         {
-	        	
+	             String fname = rs.getString("FIRST_NAME").trim();
+	             String lname = rs.getString("LAST_NAME").trim();
+	             String email = rs.getString("EMAIL").trim();
+	             
+		         profile += "<h1>Profile</h1>";
+		         profile += "<p>Hello " + lname + ", " + fname + "";
+		         profile += "<p>Your email is " + email + "";
 	         }
 	         
 	         rs.close();
 	         preparedStatement.close();
 	         connection.close();
-        	 response.sendRedirect("index.html");
+        	 
+        	 request.setAttribute("data", profile);
+        	 RequestDispatcher view = request.getRequestDispatcher("template.jsp");      
+        	 view.forward(request, response);
 	      }
 
      
