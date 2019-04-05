@@ -41,7 +41,7 @@ public class AddTask extends HttpServlet
         String uname = cookies[1].getValue();
 
 
-        String insertSql = " INSERT INTO " + uname + " (id, TITLE, OBJECT) VALUES (default,?,?)";
+        String insertSql = " INSERT INTO " + uname + " (ID, DT, TITLE, OBJECT) VALUES (default,CURDATE(),?,?)";
 
         try {
             DBConnection.getDBConnection();

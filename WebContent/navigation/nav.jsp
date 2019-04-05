@@ -36,7 +36,7 @@
 				<button class="dropbtn" ><%out.print(name);%></button>
 				<div class="dropdown-content">
 					<a href="Profile">Profile</a>
-					<a href="GetTask">My tasks</a>
+					<a href="GetTasks">My tasks</a>
 					<a href="Phonebook">My Phone Book</a>
 					<a href="LogOut">Log out</a>	
 				</div>

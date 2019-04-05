@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/GetTask")
+@WebServlet("/GetTasks")
 public class GetTasks extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -23,6 +24,7 @@ public class GetTasks extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+    	response.setContentType("text/html; charset=UTF-8");
         Cookie[] cookies = null;
         cookies = request.getCookies();
         String uname = cookies[1].getValue();
@@ -41,29 +43,44 @@ public class GetTasks extends HttpServlet {
             ResultSet rs = preparedStatement.executeQuery();
             String task = "";
 
-            while (rs.next()) {
-                String subTask = "";
-
-                int id = rs.getInt("id");
-                String date = rs.getString("DT").trim();
-                String title = rs.getString("TITLE").trim();
-                String text = rs.getString("OBJECT").trim();
-
-                subTask += "<form class='canvas'>";
-                subTask += "<p><h3>Task #" + id + "</h3>";
-                subTask += "<p><h3>" + title + "created at " + date + "</h3>";
-                subTask += "<p>" + text;
-                task += subTask;
+            ArrayList<String> arr = new ArrayList<String>();
+            if (!rs.next())
+            {
+            	task += "<p><p><a href=\"addTask.html\">Add task</a>";
+                rs.close();
+                preparedStatement.close();
+                connection.close();
+                
+            	request.setAttribute("data", "<h1>No tasks created</h1>");
+                RequestDispatcher view = request.getRequestDispatcher("template3.jsp");
+                view.forward(request, response);
+                
             }
             
-            task += "<p><p><a href=\"addTask.html\">Add task</a>";
+            else
+            {
+                arr.add(Integer.toString(rs.getInt("id")));
+                arr.add(rs.getString("DT").trim());
+                arr.add(rs.getString("TITLE").trim());
+                arr.add(rs.getString("OBJECT").trim());
+
+	            while (rs.next()) {
+	            	arr.add(Integer.toString(rs.getInt("id")));
+	                arr.add(rs.getString("DT").trim());
+	                arr.add(rs.getString("TITLE").trim());
+	                arr.add(rs.getString("OBJECT").trim());
+	            }
+
             rs.close();
             preparedStatement.close();
             connection.close();
 
-            request.setAttribute("data", task);
+            request.setAttribute("data", arr);
             RequestDispatcher view = request.getRequestDispatcher("template3.jsp");
             view.forward(request, response);
+
+            
+            }
         } catch (SQLException se) {
             se.printStackTrace();
         } catch (Exception e) {

@@ -18,7 +18,9 @@
 	</script>
 
 	<form class='canvas'>
-		<p>${requestScope["data"]}</p>
+		<div class='subcanvas'>
+			<p>${requestScope["data"]}</p>
+		</div>
 	</form>
 
 <div id="bot-placeholder"></div>

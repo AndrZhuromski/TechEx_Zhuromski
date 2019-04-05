@@ -106,7 +106,7 @@ public class Registration extends HttpServlet {
 	      
 	      connection = null;
 	      String insertSql = " INSERT INTO techexUsers (id, USERNAME,FIRST_NAME,LAST_NAME,EMAIL,PASSWORD) VALUES (default,?,?,?,?,?);";
-	      String createTable = "CREATE TABLE " + uname + " (ID INT NOT NULL AUTO_INCREMENT, DT DATE NOT NULL CURRENT_TIMESTAMP, TITLE varchar(50) NOT NULL, OBJECT varchar(200) NOT NULL, PRIMARY KEY (ID))";
+	      String createTable = "CREATE TABLE " + uname + " (ID INT NOT NULL AUTO_INCREMENT, DT DATE, TITLE varchar(50) NOT NULL, OBJECT varchar(200) NOT NULL, PRIMARY KEY (ID))";
 
 	      try 
 	      {
